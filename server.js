@@ -1,10 +1,10 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
-var mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const mongoose = require('mongoose');
 require('dotenv').config();
-var PORT = process.env.PORT || 3001;
-var app = express();
+const PORT = process.env.PORT || 3001;
+const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -14,8 +14,8 @@ if (process.env.NODE_ENV == 'production') {
   app.use(express.static(__dirname + '/client/public'));
 }
 
-var articlesController = require('./server/controllers/article-controller');
-var router = new express.Router();
+const articlesController = require('./server/controllers/article-controller');
+const router = new express.Router();
 router.get('/api/saved', articlesController.find);
 router.post('/api/saved', articlesController.insert);
 router.delete('/api/saved/:id', articlesController.delete);
