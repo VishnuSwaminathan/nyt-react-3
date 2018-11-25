@@ -7,12 +7,10 @@
     "node": "10.3.0"
   },
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
+    "start": "./node_modules/.bin/concurrently \"./node_modules/.bin/nodemon\" \"nodemon server.js\" \"npm run client\"",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +20,6 @@
   },
   "dependencies": {
     "body-parser": "^1.17.2",
-    "if-env": "^1.0.4",
     "dotenv": "^6.1.0",
     "express": "^4.15.4",
     "mongoose": "^4.11.10"
